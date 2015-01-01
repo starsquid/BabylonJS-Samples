@@ -309,4 +309,28 @@
         <div id="notSupported" class="hidden">Sorry but your browser does not support WebGL...</div>
     </div>
 </body>
+ <!-- script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script -->
+ <script src="../../html5-fps-meter/d3.v3.js" charset="utf-8"></script>
+ <script src="../../html5-fps-meter/fps-meter.js" charset="utf-8"></script>
+ <script type="text/javascript">
+     var fpsChart = new fps()
+
+     // chain-load the FPS timer functions
+     oldLoadFunction = window.onload
+     window.onload = function() {
+         if (oldLoadFunction)
+             oldLoadFunction()
+
+         document.body.appendChild(fpsChart.createFrameTimeChart());
+
+         fpsChart.installIntervalTimer()
+     }
+
+     // add it to the RAF queue
+     function step(timestamp) {
+         fpsChart.markNewFrame()
+         window.requestAnimationFrame(step)
+     }
+     window.requestAnimationFrame(step)
+ </script>
 </html>
