@@ -260,11 +260,7 @@ var onload = function () {
         return function () {
             var sceneLocation = "Scenes/";
 
-            // Check support
-            if (!BABYLON.Engine.isSupported()) {
-                document.getElementById("notSupported").className = "";
-            } else {
-
+            {
                 restoreAllUI();
 
                 if (window.location.hostname.indexOf("localhost") == -1) {
